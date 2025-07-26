@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Kanto Fakemon Archive</title>
+    <style>
+        /* --- Google Font --- */
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        /* --- General Styles & Variables --- */
+        :root {
+            --main-bg: #1a1a1a;
+            --text-color: #00FF41;
+            --border-color: #4c4c4c;
+            --accent-color: #FFDE00;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background-color: var(--main-bg);
+            color: var(--text-color);
+            text-align: center;
+            line-height: 1.6;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Header --- */
+        header h1 {
+            font-size: 2rem;
+            color: var(--accent-color);
+            text-shadow: 3px 3px 0px var(--border-color);
+            margin-bottom: 1rem;
+        }
+
+        header p {
+            font-size: 0.8rem;
+            margin-bottom: 2rem;
+        }
+
+        /* --- Main Content: The Museum Display --- */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        #museum-display {
+            border: 4px solid var(--border-color);
+            background-color: #000;
+            padding: 1.5rem;
+            width: 100%;
+            margin-bottom: 1.5rem;
+        }
+
+        #pokemon-image-container {
+            background-color: var(--main-bg);
+            border: 2px dashed var(--border-color);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            height: 250px; /* Fixed height for consistency */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #pokemon-image {
+            max-width: 100%;
+            max-height: 100%;
+            image-rendering: pixelated; /* Keeps pixel art crisp */
+        }
+        
+        #pokemon-name {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        #pokemon-description {
+            font-size: 0.75rem;
+            text-align: left;
+            min-height: 80px; /* Reserve space to prevent layout shift */
+        }
+
+        /* --- Navigation Controls --- */
+        #controls {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .nav-btn {
+            font-family: 'Press Start 2P', cursive;
+            background-color: var(--border-color);
+            color: var(--text-color);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--accent-color);
+            color: var(--main-bg);
+        }
+
+        /* --- Footer --- */
+        footer {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 2px dashed var(--border-color);
+            font-size: 0.7rem;
+            opacity: 0.7;
+        }
+        
+        /* --- Responsive Design --- */
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+            header h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>The Kanto Fakemon Archive 💾</h1>
+        <p>A museum of Fake Pokémon so I don't get sued by Nintendo!</p>
+    </header>
+
+    <hr style="width:100%; border:1px dashed var(--border-color); margin-bottom: 2rem;">
+
+    <main>
+        <div id="museum-display">
+            <div id="pokemon-image-container">
+                <img id="pokemon-image" src="Crystaleaf.png" alt="An image of a Fakemon">
+            </div>
+            <h2 id="pokemon-name">Loading...</h2>
+            <p id="pokemon-description">Please wait while we load the data from our Porygon-powered database...</p>
+        </div>
+
+        <div id="controls">
+            <button id="prev-btn" class="nav-btn">&lt;&lt; PREV</button>
+            <button id="next-btn" class="nav-btn">NEXT &gt;&gt;</button>
+        </div>
+    </main>
+
+    <hr style="width:100%; border:1px dashed var(--border-color); margin-top: 2rem;">
+    
+    <footer>
+        <p>&copy; 2025 The Kanto Fakemon Archive. Built with nostalgia.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- Pokémon Database ---
+            // This is where you define the data for each exhibit.
+            // Just add a new object to this array for each new Pokémon.
+            const pokemonData = [
+                {
+                    name: "Crystaleaf",
+                    image: "Crystaleaf.png",
+                    description: "A crystal grows on its back from birth. This crystal seems to draw energy directly from the moonlight, allowing it to go for days without eating."
+                },
+                {
+                    name: "Geodile",
+                    image: "Geodile.png",
+                    description: "As it evolves, the crystal on its back splinters into two larger formations. Its hide becomes tougher, and it develops a more territorial personality."
+                },
+                {
+                    name: "Terracrystal",
+                    image: "Terracrystal.png",
+                    description: "The crystals covering its back have become a massive, shimmering cluster. Ancient and wise, this creature is said to be a guardian of the earth itself."
+                },
+                {
+                    name: "Quartzel",
+                    image: "Quartzel.png",
+                    description: "The quartz crystal on its tail hums with a strange energy. If the crystal's glow ever fades, it is a sign that the creature is in poor health."
+                },
+                {
+                    name: "Cindercore",
+                    image: "Cindercore.png",
+                    description: "Now more aggressive, it uses its sharp tail crystal as a primary weapon in battle. The crystal glows with intense heat during confrontations."
+                },
+                {
+                    name: "Drakonquartz",
+                    image: "Drakonquartz.png",
+                    description: "A majestic, winged beast whose tail ends in a cluster of explosive quartz shards. The crystal horns on its head can focus powerful beams of energy."
+                },
+                {
+                    name: "Pebblise",
+                    image: "Pebblise.png",
+                    description: "Its shell is made of smooth, sturdy rock that is nearly impenetrable. When threatened, it can withdraw completely into its stony shell for protection."
+                },
+                {
+                    name: "Bouldertoise",
+                    image: "Bouldertoise.png",
+                    description: "Its shell is now a rugged fortress of cracked stone, with small geode cannons poking out. It's known for its incredible defense and longevity."
+                },
+                {
+                    name: "Fortressoise",
+                    image: "Fortressoise.png",
+                    description: "A walking fortress. The massive stone cannons on its back can launch pressurized blasts of mud and rock with pinpoint accuracy. It is a true force of nature."
+                },
+                {
+                    name: "Plumeworm",
+                    image: "Plumeworm.png",
+                    description: "The feathery antennae on its head can detect subtle changes in the air, warning it of predators. It has an insatiable appetite and is constantly searching for leaves."
+                }
+            ];
+
+            // --- Element References ---
+            const pokemonImage = document.getElementById('pokemon-image');
+            const pokemonName = document.getElementById('pokemon-name');
+            const pokemonDescription = document.getElementById('pokemon-description');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+
+            let currentIndex = 0;
+
+            // --- Functions ---
+            function showPokemon(index) {
+                const pokemon = pokemonData[index];
+                pokemonImage.src = pokemon.image;
+                pokemonImage.alt = `An image of ${pokemon.name}`;
+                pokemonName.textContent = pokemon.name;
+                pokemonDescription.textContent = pokemon.description;
+            }
+
+            // --- Event Listeners ---
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % pokemonData.length;
+                showPokemon(currentIndex);
+            });
+
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + pokemonData.length) % pokemonData.length;
+                showPokemon(currentIndex);
+            });
+
+            // --- Initial Load ---
+            showPokemon(currentIndex);
+        });
+    </script>
+
+</body>
+</html>
